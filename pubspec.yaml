@@ -1,0 +1,14 @@
+name: number_interpolation
+description: interpolation port from React Native
+version: 1.0.0
+repository: https://github.com/bjartebore/interpolation
+homepage: https://github.com/bjartebore/interpolation
+
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dev_dependencies:
+  matcher: ^0.12.10
+  pedantic: ^1.9.0
+  test: ^1.16.5
