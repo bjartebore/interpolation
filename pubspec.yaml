@@ -1,6 +1,6 @@
 name: number_interpolation
 description: interpolation port from React Native
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/bjartebore/interpolation
 homepage: https://github.com/bjartebore/interpolation
 

@@ -12,9 +12,11 @@ enum ExtrapolateType {
   Extend,
 }
 
-typedef Easing = num Function(num number);
+typedef Easing = double Function(double number);
 
-final Easing linear = (t) => t;
+typedef Interpolation = double Function(num);
+
+final Easing _linear = (t) => t;
 
 int _findRange(num input, List<num> inputRange) {
   int i;
@@ -26,7 +28,7 @@ int _findRange(num input, List<num> inputRange) {
   return i - 1;
 }
 
-num Function(num) createInterpolation ({
+Interpolation createInterpolation ({
   required List<num> inputRange,
   required List<num> outputRange ,
   Easing? easing,
@@ -48,7 +50,7 @@ num Function(num) createInterpolation ({
       inputRange[range + 1],
       outputRange[range],
       outputRange[range + 1],
-      easing ?? linear,
+      easing ?? _linear,
       extrapolateLeft ?? extrapolate,
       extrapolateRight ?? extrapolate,
     );
@@ -56,7 +58,7 @@ num Function(num) createInterpolation ({
 }
 
 
-num _interpolate(
+double _interpolate(
   num input,
   num inputMin,
   num inputMax,
@@ -66,14 +68,14 @@ num _interpolate(
   ExtrapolateType extrapolateLeft,
   ExtrapolateType extrapolateRight,
 ) {
-  var result = input;
+  var result = input.toDouble();
 
   // Extrapolate
   if (result < inputMin) {
     if (extrapolateLeft == ExtrapolateType.Identity) {
       return result;
     } else if (extrapolateLeft == ExtrapolateType.Clamp) {
-      result = inputMin;
+      result = inputMin.toDouble();
     } else if (extrapolateLeft == ExtrapolateType.Extend) {
       // noop
     }
@@ -83,21 +85,21 @@ num _interpolate(
     if (extrapolateRight == ExtrapolateType.Identity) {
       return result;
     } else if (extrapolateRight == ExtrapolateType.Clamp) {
-      result = inputMax;
+      result = inputMax.toDouble();
     } else if (extrapolateRight == ExtrapolateType.Extend) {
       // noop
     }
   }
 
   if (outputMin == outputMax) {
-    return outputMin;
+    return outputMin.toDouble();
   }
 
   if (inputMin == inputMax) {
     if (input <= inputMin) {
-      return outputMin;
+      return outputMin.toDouble();
     }
-    return outputMax;
+    return outputMax.toDouble();
   }
 
   // Input Range

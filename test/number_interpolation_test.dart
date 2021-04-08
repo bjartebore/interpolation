@@ -8,7 +8,7 @@
 import 'package:number_interpolation/number_interpolation.dart';
 import 'package:test/test.dart';
 
-num _quad(num t) => t * t;
+double _quad(double t) => t * t;
 
 void main() {
 
